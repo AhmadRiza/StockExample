@@ -3,10 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/watchlist">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/watchlist"
         tools:layout="@layout/fragment_stockbit_home"
         android:name="com.github.ahmadriza.stockbit.ui.home.WatchListFragment"
         android:label="WatchListFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        tools:layout="@layout/fragment_stockbit_login"
+        android:name="com.github.ahmadriza.stockbit.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_watchlist"
+            app:destination="@id/watchlist"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popUpTo="@id/main_navigation" />
+    </fragment>
 </navigation>

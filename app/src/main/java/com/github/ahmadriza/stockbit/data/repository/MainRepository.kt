@@ -49,8 +49,8 @@ class MainRepository @Inject constructor(
     )
 
     fun fakeLogin(username: String) = liveData(Dispatchers.IO) {
-        local.fakeLogin(username)
-        kotlinx.coroutines.delay(1000)
+//        local.fakeLogin(username)
+//        kotlinx.coroutines.delay(1000)
         emit(true)
     }
 

@@ -28,13 +28,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        if (true) {
-            navController.graph = navController.navInflater.inflate(R.navigation.main_navigation)
-            binding.navView.setupWithNavController(navController)
-        } else {
-            navController.graph = navController.navInflater.inflate(R.navigation.auth_navigation)
-            binding.navView.gone()
-        }
+        navController.graph = navController.navInflater.inflate(R.navigation.main_navigation)
+        binding.navView.setupWithNavController(navController)
+
     }
 
     override fun initObservers() {
