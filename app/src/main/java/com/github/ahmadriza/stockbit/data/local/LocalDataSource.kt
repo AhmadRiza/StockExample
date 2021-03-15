@@ -1,9 +1,7 @@
 package com.github.ahmadriza.stockbit.data.local
 
 import com.github.ahmadriza.stockbit.data.local.db.CryptoDao
-import com.github.ahmadriza.stockbit.data.remote.interceptor.AuthInterceptor
 import com.github.ahmadriza.stockbit.models.Crypto
-import com.github.ahmadriza.stockbit.models.User
 import javax.inject.Inject
 
 /**
@@ -18,8 +16,8 @@ class LocalDataSource @Inject constructor(
     fun getCryptoList() = db.getCrypto()
     suspend fun saveCrypto(data: List<Crypto>) = execute { db.insertCrypto(data.map { it.asEntity() }) }
     suspend fun clearCache() = execute { db.clearAll() }
-    suspend fun updateCrypto(cryptoId: String, price: Double) = execute {
-        db.updatePrice(cryptoId.toInt(), price)
+    suspend fun updateCrypto(cryptoName: String, price: Double) = execute {
+        db.updatePrice(cryptoName, price)
     }
 
     fun fakeLogin(username: String) = preference.saveUser(username)

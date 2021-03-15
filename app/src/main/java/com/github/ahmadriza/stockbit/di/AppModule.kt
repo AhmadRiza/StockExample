@@ -8,6 +8,7 @@ import com.github.ahmadriza.stockbit.data.local.LocalDataSource
 import com.github.ahmadriza.stockbit.data.local.SharedPreferenceHelper
 import com.github.ahmadriza.stockbit.data.local.db.AppDB
 import com.github.ahmadriza.stockbit.data.local.db.CryptoDao
+import com.github.ahmadriza.stockbit.data.remote.CryptoSocketService
 import com.github.ahmadriza.stockbit.data.remote.MainService
 import com.github.ahmadriza.stockbit.data.remote.RemoteDataSource
 import com.github.ahmadriza.stockbit.data.remote.interceptor.AuthInterceptor
@@ -15,12 +16,18 @@ import com.github.ahmadriza.stockbit.data.remote.interceptor.JsonInterceptor
 import com.github.ahmadriza.stockbit.data.repository.MainRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.tinder.scarlet.Scarlet
+import com.tinder.scarlet.messageadapter.gson.GsonMessageAdapter
+import com.tinder.scarlet.websocket.okhttp.newWebSocketFactory
+import com.tinder.streamadapter.coroutines.CoroutinesStreamAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.WebSocket
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -116,16 +123,10 @@ object AppModule {
     @Provides
     fun provideMainRepository(
         localDataSource: LocalDataSource,
-        remoteDataSource: RemoteDataSource
-    ): MainRepository = MainRepository(localDataSource, remoteDataSource)
+        remoteDataSource: RemoteDataSource,
+        socketService: CryptoSocketService
+    ): MainRepository = MainRepository(localDataSource, remoteDataSource, socketService)
 
-
-    /*
-
-     Room.databaseBuilder(appContext, AppDatabase::class.java, "characters")
-                .fallbackToDestructiveMigration()
-                .build()
-     */
 
     @Singleton
     @Provides
@@ -137,5 +138,21 @@ object AppModule {
     @Singleton
     @Provides
     fun provideCryptoDao(appDB: AppDB): CryptoDao = appDB.cryptoDao()
+
+
+    @Singleton
+    @Provides
+    fun provideScarlet(okHttpClient: OkHttpClient): Scarlet = Scarlet.Builder()
+        .webSocketFactory(okHttpClient.newWebSocketFactory("https://streamer.cryptocompare.com/v2/?api_key=${BuildConfig.API_KEY}"))
+        .addMessageAdapterFactory(GsonMessageAdapter.Factory())
+        .addStreamAdapterFactory(CoroutinesStreamAdapterFactory())
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideWebSocketService(scarlet: Scarlet): CryptoSocketService = scarlet.create(CryptoSocketService::class.java)
+
+
+
 
 }

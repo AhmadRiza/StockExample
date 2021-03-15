@@ -10,7 +10,7 @@ import java.util.*
 data class Crypto(
     @SerializedName("CoinInfo") val coin: Coin,
     @SerializedName("RAW") val rawData: RawData
-){
+) {
 
     fun asEntity() = CryptoEntity(
         id = coin.id.toInt(),
@@ -56,3 +56,13 @@ data class CryptoEntity(
     var changePercent: Float,
     var lastEdit: Date = Date()
 )
+
+data class SocketCryptoMessage(
+    @SerializedName("PRICE") var price: Double,
+    @SerializedName("MARKET") val market: String,
+    @SerializedName("FROMSYMBOL") val from: String,
+    @SerializedName("TOSYMBOL") val to: String,
+    @SerializedName("TYPE") val type: String
+)
+
+data class SubscribeSocket(val action: String, val subs: List<String>)

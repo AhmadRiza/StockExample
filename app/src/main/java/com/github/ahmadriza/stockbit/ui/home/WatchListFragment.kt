@@ -2,8 +2,10 @@ package com.github.ahmadriza.stockbit.ui.home
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ahmadriza.stockbit.R
 import com.github.ahmadriza.stockbit.databinding.FragmentStockbitHomeBinding
+import com.github.ahmadriza.stockbit.utils.android.VisibleItemListener
 import com.github.ahmadriza.stockbit.utils.base.BaseFragment
 import com.github.ahmadriza.stockbit.utils.data.Resource
 import com.github.ahmadriza.stockbit.utils.onScrollLoad
@@ -26,6 +28,12 @@ class WatchListFragment: BaseFragment<FragmentStockbitHomeBinding>() {
         binding.rvCrypto.onScrollLoad(1){
             vm.loadMore()
         }
+
+        binding.rvCrypto.addOnScrollListener(VisibleItemListener(binding.rvCrypto.layoutManager as LinearLayoutManager){ start, end ->
+            vm.subsribeSocketForItem(
+                cryptoAdapter.currentList.subList(start, end)
+            )
+        })
     }
 
     override fun initObservers() {

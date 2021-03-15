@@ -4,6 +4,7 @@
     package="com.github.ahmadriza.stockbit">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name="com.github.ahmadriza.stockbit.App"

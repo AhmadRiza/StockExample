@@ -19,6 +19,6 @@ interface CryptoDao {
     @Query("DELETE FROM CryptoEntity")
     suspend fun clearAll()
 
-    @Query("UPDATE CryptoEntity SET price = :newPrice WHERE id = :cryptoId")
-    suspend fun updatePrice(cryptoId: Int, newPrice: Double)
+    @Query("UPDATE CryptoEntity SET price = :newPrice WHERE name = :cryptoName")
+    suspend fun updatePrice(cryptoName: String, newPrice: Double)
 }

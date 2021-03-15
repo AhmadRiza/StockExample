@@ -63,6 +63,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+    //Scarlet socket
+    implementation 'com.tinder.scarlet:scarlet:0.1.11'
+    implementation "com.tinder.scarlet:websocket-okhttp:0.1.11"
+    implementation "com.tinder.scarlet:stream-adapter-coroutines:0.1.11"
+    implementation "com.tinder.scarlet:message-adapter-gson:0.1.11"
+    implementation "com.tinder.scarlet:lifecycle-android:0.1.11"
+
+
 //    GMS
 //    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 //    implementation 'com.google.android.gms:play-services-location:17.0.0'
@@ -97,7 +105,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Paging
-    implementation "androidx.paging:paging-runtime:2.1.2"
 
     //Glide
 //    implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -112,6 +119,8 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.19.0'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
