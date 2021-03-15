@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:elevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/parentPadding"
+                    app:srcCompat="@drawable/ic_menu"
+                    app:tint="@color/textSecondary"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/MText.Subtitle"
+                    android:layout_width="@dimen/_60sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/stockbittransparent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_help"
+                    app:layout_constraintStart_toEndOf="@id/btn_back" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_help"
+                    app:tint="@color/textSecondary"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_12sdp"
+                    android:src="@drawable/ic_date"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:paddingHorizontal="@dimen/parentPadding"
+                android:paddingVertical="@dimen/standardMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Watchlist"
+                    app:drawableTint="@color/textPrimary"
+                    app:drawableEndCompat="@drawable/ic_down"
+                    style="@style/MText.Subtitle"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Symbol"
+                    android:drawablePadding="@dimen/_4sdp"
+                    app:drawableTint="@color/textSecondary"
+                    app:drawableStartCompat="@drawable/ic_add"
+                    style="@style/MText.Normal.Secondary"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_crypto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/_60sdp"
+                android:clipToPadding="false"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_crypto"
+                />
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:visibility="gone"
+            android:layout_marginVertical="@dimen/parentPadding"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:indeterminateTint="@color/colorAccent"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

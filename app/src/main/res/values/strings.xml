@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Stockbit Example</string>
+    <string name="beranda">Beranda</string>
+    <string name="pesanan">Pesanan</string>
+    <string name="akun">Akun</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="login">Masuk</string>
+    <string name="login_google">Masuk dengan Google</string>
+    <string name="login_fb">Masuk dengan Facebook</string>
+    <string name="username_or_email">Username or Email</string>
+    <string name="password">Password</string>
+    <string name="or_label">Atau</string>
+    <string name="forgot_pass">Lupa Password</string>
+</resources>
